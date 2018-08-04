@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/one_item_background"
+    android:orientation="vertical"
+    android:elevation="5dp"
+    android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="5dp"/>
+
+    <TextView
+        android:id="@+id/rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#rank 1"
+        android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BTC"
+            android:textColor="#d4b22a"
+            android:textSize="20dp"
+            android:layout_below="@id/img" />
+
+    <TextView
+        android:id="@+id/shortname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bitcoin"
+        android:layout_below="@id/name" />
+
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="31100 zł"
+            android:layout_below="@id/img"
+            android:layout_alignParentEnd="true"
+            android:textColor="#d4b22a"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/price"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/onedaypercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="0%"
+                android:textColor="#4bd614" />
+
+            <TextView
+                android:id="@+id/oneday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#bebebe"
+                android:textSize="12sp"
+                android:text="24 h" />
+        </LinearLayout>
+
+</RelativeLayout>

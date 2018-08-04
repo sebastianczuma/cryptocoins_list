@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Coins</string>
+
+    <string-array name="waluty">
+        <item>PLN</item>
+        <item>EUR</item>
+        <item>USD</item>
+        <item>BTC</item>
+    </string-array>
+
+    <string-array name="historia">
+        <item>1h</item>
+        <item>24h</item>
+        <item>7d</item>
+    </string-array>
+</resources>
