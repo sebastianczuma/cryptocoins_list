@@ -17,7 +17,7 @@ import org.json.JSONException;
 /**
  * Created by sebastianczuma on 23.08.2016.
  */
-public class testDownload implements Interfejs {
+public class testDownload implements UrlApi {
 
     public static void getCrypto(final Context ctx) {
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);

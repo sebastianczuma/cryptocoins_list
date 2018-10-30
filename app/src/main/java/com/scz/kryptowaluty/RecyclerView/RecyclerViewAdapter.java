@@ -8,13 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.scz.kryptowaluty.R;
+import com.scz.kryptowaluty.UrlApi;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolders> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolders> implements UrlApi {
     private List<Item> itemList;
     private Context ctx;
 
@@ -22,9 +22,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         this.itemList = itemList;
     }
 
+
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.one_item, null);
+        View layoutView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.one_item, null);
         ctx = parent.getContext();
         return new RecyclerViewHolders(layoutView);
     }
@@ -39,28 +41,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         if (!s0.equals("null")) {
 
             if (Float.valueOf(s0) < 1) {
-                holder.price.setText(itemList.get(position).getPrice());
+                String priceText = String.format("%.7f", Float.valueOf(s0))
+                        .replace(",", ".") + " PLN";
+                holder.price.setText(priceText);
             } else {
-                holder.price.setText(String.format("%.2f", Float.valueOf(s0)).replace(",", "."));
+                String priceText = String.format("%.2f", Float.valueOf(s0))
+                        .replace(",", ".") + " PLN";
+                holder.price.setText(priceText);
             }
         }
 
+        String rankText = "#rank " + itemList.get(position).getRank();
 
-        holder.rank.setText("#rank " + itemList.get(position).getRank());
+        holder.rank.setText(rankText);
 
         holder.shortname.setText(itemList.get(position).getName());
-
-
-        /*String s1 = itemList.get(position).getOnehourpercent();
-        if (!s1.equals("null")) {
-            if (Float.valueOf(s1) < 0) {
-                holder.onehour.setTextColor(ContextCompat.getColor(ctx, R.color.redd));
-            } else {
-                holder.onehour.setTextColor(ContextCompat.getColor(ctx, R.color.greenn));
-            }
-        } else {
-            holder.oneday.setTextColor(ContextCompat.getColor(ctx, R.color.black));
-        }*/
 
         String s2 = itemList.get(position).getOnedaypercent();
         if (!s2.equals("null")) {
@@ -69,33 +64,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             } else {
                 holder.oneday.setTextColor(ContextCompat.getColor(ctx, R.color.greenn));
             }
-            holder.oneday.setText(s2 + "%");
+            String oneDayText = s2 + "%";
+            holder.oneday.setText(oneDayText);
         } else {
             holder.oneday.setTextColor(ContextCompat.getColor(ctx, R.color.black));
         }
 
-
-        /*String s3 = itemList.get(position).getSevendayspercent();
-        if (!s3.equals("null")) {
-            if (Float.valueOf(s3) < 0) {
-                holder.sevendays.setTextColor(ContextCompat.getColor(ctx, R.color.redd));
-            } else {
-                holder.sevendays.setTextColor(ContextCompat.getColor(ctx, R.color.greenn));
-            }
-        } else {
-            holder.oneday.setTextColor(ContextCompat.getColor(ctx, R.color.black));
-        }*/
-
-        //holder.onehour.setText(s1 + " %");
-
-        //holder.sevendays.setText(s3 + " %");
-
         Context context = holder.img.getContext();
 
         String end = itemList.get(position).getName();
-        end = end.toLowerCase().replace(" ", "-").replace(".", "");
-        String uri = ("https://coincap.io/images/coins/" + end + ".png");
-        Picasso.with(context).load(uri).into(holder.img);
+        end = end.toLowerCase().replace(" ", "-")
+                .replace(".", "");
+        String uri = (imageUrl + end + ".png");
+        Picasso
+                .with(context)
+                .load(uri)
+                .resize(256, 256)
+                .onlyScaleDown()
+                .into(holder.img);
     }
 
     @Override

@@ -9,8 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import com.scz.kryptowaluty.RecyclerView.Item;
 import com.scz.kryptowaluty.RecyclerView.RecyclerViewAdapter;
@@ -22,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Interfejs {
+public class MainActivity extends AppCompatActivity implements UrlApi {
     static JSONArray jarr;
     RecyclerView rView;
     ProgressDialog pDialog;
@@ -69,11 +67,10 @@ public class MainActivity extends AppCompatActivity implements Interfejs {
                         jsonObject.get("rank").toString(),
                         jsonObject.get("price_pln").toString(),
                         jsonObject.get("symbol").toString(),
-                        jsonObject.get("percent_change_1h").toString(),
-                        jsonObject.get("percent_change_24h").toString(),
-                        jsonObject.get("percent_change_7d").toString()));
+                        jsonObject.get("percent_change_24h").toString()));
             }
         } catch (JSONException e) {
+            Log.e("JSONException", "msg: " + e);
         }
         pDialog.dismiss();
 
